@@ -29,6 +29,7 @@ const initWebRoutes = (app) => {
       failureRedirect: "/login",
     })
   );
+  router.post("/logout", checkUser.handleLogout);
   //rest api
   //GET - R, POST- C, PUT - U, DELETE - D
   router.get("/api/test-api", apiController.testApi);

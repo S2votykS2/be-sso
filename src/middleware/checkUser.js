@@ -21,6 +21,22 @@ const isLogin = (req, res, next) => {
   }
 };
 
+const handleLogout = (req, res, next) => {
+  try {
+    // router.post('/logout', function(req, res, next) {
+    //     req.logout(function(err) {
+    //       if (err) { return next(err); }
+    //       res.redirect('/');
+    //     });
+    //   });
+
+    req.session.destroy((error) => {
+      req.logout();
+      res.redirect("/");
+    });
+  } catch (e) {}
+};
 module.exports = {
   isLogin,
+  handleLogout,
 };
