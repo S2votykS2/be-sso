@@ -5,8 +5,6 @@ import loginRegisterService from "../service/loginRegisterService";
 const configPassport = () => {
   passport.use(
     new LocalStrategy(async function verify(username, password, cb) {
-      console.log("check username", username);
-      console.log("check password", password);
       let rawData = {
         valueLogin: username,
         password: password,

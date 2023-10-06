@@ -48,6 +48,7 @@ const handleUpdateUser = async (req, res) => {
 };
 
 const handleLogin = async (req, res) => {
+  console.log("Check query serviceURL", req.query.serviceURL);
   return res.render("login.ejs");
 };
 module.exports = {

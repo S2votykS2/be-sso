@@ -1,7 +1,6 @@
 const isLogin = (req, res, next) => {
   try {
     let logon = req.isAuthenticated();
-    console.log("check logon", logon);
     if (logon) {
       if (req.path === "/login") {
         res.redirect("/");
