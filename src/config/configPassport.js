@@ -3,18 +3,20 @@ import passport from "passport";
 import loginRegisterService from "../service/loginRegisterService";
 
 const configPassport = () => {
+  // chạy vào khi có 2 form input có name lần lượt là username va password;
   passport.use(
     new LocalStrategy(async function verify(username, password, cb) {
       let rawData = {
         valueLogin: username,
         password: password,
       };
+      console.log("check data sign in:", rawData);
       let res = await loginRegisterService.handleUserLogin(rawData);
       console.log("check res", res);
       if (res && +res.EC === 0) {
         return cb(null, { data: res.DT }); // output cho ra, chuẩn bị lưu vào DB
       }
-      if (res && res.EC !== 0) {
+      if (res && +res.EC !== 0) {
         return cb(null, false, { message: res.EM });
       }
 

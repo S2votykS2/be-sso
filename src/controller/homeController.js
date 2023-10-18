@@ -47,10 +47,16 @@ const handleUpdateUser = async (req, res) => {
   return res.redirect("/user");
 };
 
-const handleLogin = async (req, res) => {
-  console.log("Check query serviceURL", req.query.serviceURL);
-  return res.render("login.ejs");
-};
+// const handleLogin = async (req, res) => {
+//   let serviceURL = req.query.serviceURL;
+//   let errMessage = req.flash("data");
+//   console.log("check errorMessage", err);
+//   console.log("check service URL", serviceURL);
+//   return res.render("login.ejs", {
+//     error: errMessage,
+//     redirectURL: serviceURL,
+//   });
+// };
 module.exports = {
   handleHelloWord,
   handleUserPage,
@@ -58,5 +64,5 @@ module.exports = {
   handleDeleteUser,
   getUpdateUserPage,
   handleUpdateUser,
-  handleLogin,
+  //   handleLogin,
 };

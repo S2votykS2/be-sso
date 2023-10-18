@@ -54,7 +54,7 @@ const configSession = (app) => {
       cb(null, user); // lưu xuống DB với dât là user
     });
   });
-  // giải mã: đọc thông tin mã hóa từ DB => check quền
+  // giải mã: đọc thông tin mã hóa từ DB => check quyền
   passport.deserializeUser(function (user, cb) {
     // console.log("check user after", user);
     process.nextTick(function () {

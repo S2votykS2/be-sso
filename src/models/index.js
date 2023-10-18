@@ -8,8 +8,6 @@ const env = process.env.NODE_ENV || "development";
 // const config = require(__dirname + "/../config/config.json")[env];
 const db = {};
 
-// Ket noi DB
-// C1: dựa vào file config.json
 // let sequelize;
 // if (config.use_env_variable) {
 //   sequelize = new Sequelize(process.env[config.use_env_variable], config);
@@ -21,6 +19,8 @@ const db = {};
 //     config
 //   );
 // }
+// Ket noi DB
+// C1: dựa vào file config.json
 // C2: dùng trực tiếp
 const sequelize = new Sequelize(
   process.env.DB_DATABASE,
