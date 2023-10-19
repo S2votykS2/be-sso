@@ -3,8 +3,7 @@ const isLogin = (req, res, next) => {
     let logon = req.isAuthenticated();
     if (logon) {
       if (req.path === "/login") {
-        res.redirect("/");
-        next();
+        return res.redirect("/");
       } else {
         next();
       }
@@ -12,7 +11,7 @@ const isLogin = (req, res, next) => {
       if (req.path === "/login") {
         next();
       } else {
-        res.redirect("/login");
+        return res.redirect("/login");
       }
     }
   } catch (e) {

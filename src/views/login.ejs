@@ -28,24 +28,30 @@
         $('#btnLogin').on('click', () => {
             const username = $('#username').val();
             const password = $('#password').val();
+            const serviceURL = $('#redirectURL').val();
             $('#flashMsg').empty("");
             $.ajax({
                 type: "POST",
                 url: `${window.location.origin}/login`,
                 data: {
                     username,
-                    password
+                    password,
+                    serviceURL
                 },
                 withCredentials: true,
-                success: (data) => {
+                success: function(data) {
+                    console.log("check data", data);
                     $('#flashMsg').addClass('none-flash');
-                    window.location.href = '/';
+                    const redirectURL = `${data.redirectURL}/code?ssoToken=${data.code}`
+                        // window.location.href = redirectURL;
+                        // window.location.href = "/";
                 },
 
-                error: (request, status, error) => {
+                error: function(request, status, error) {
                     $('#password').val('');
                     $('#flashMsg').removeClass('none-flash');
                     $('#flashMsg').append(request.responseText);
+                    // Bug: request.responseText = UnAuthorise
                 }
             }, )
         })
@@ -65,12 +71,13 @@
                             <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg" class="img-fluid" alt="Phone image">
                         </div>
                         <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
-                            <div class="alert alert-danger my-1 none-flash" role="alert" id="flashMsg">
+                            <input value="<%=redirectURL %>" hidden id="redirectURL" />
+                            <div class="alert alert-danger my-4 none-flash" role="alert" id="flashMsg">
                             </div>
                             <!-- Email input -->
                             <div class="form-outline mb-4">
                                 <input type="email" name="username" class="form-control form-control-lg" id="username" />
-                                <label class="form-label" for="form1Example13">Email address</label>
+                                <label class="form-label" for="form1Example13">Email address </label>
                             </div>
 
                             <!-- Password input -->

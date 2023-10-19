@@ -10,7 +10,6 @@ const configPassport = () => {
         valueLogin: username,
         password: password,
       };
-      console.log("check data sign in:", rawData);
       let res = await loginRegisterService.handleUserLogin(rawData);
       console.log("check res", res);
       if (res && +res.EC === 0) {

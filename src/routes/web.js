@@ -30,18 +30,28 @@ const initWebRoutes = (app) => {
   //     failureRedirect: "/login",
   //   })
   // );
+
   router.post("/login", (req, res, next) => {
     passport.authenticate("local", {
       function(error, user, info) {
         if (error) {
-          return res.status(500).JSON(error);
+          return res.status(500).json(error);
         }
+
         if (!user) {
-          return res.status(401).JSON(info.message);
+          return res.status(401).json(info.message);
         }
-        req.login(user, (err) => {
-          if (err) return next(err);
-          return res.status(200).JSON(user);
+
+        req.logIn(user, function (err) {
+          if (err) {
+            return next(err);
+          }
+          console.log(req.body.serviceURL);
+          console.log("user", user);
+          return res
+            .status(200)
+            .json({ ...user, redirectURL: req.body.serviceURL });
+          // Bug: ko truyen dc tham so 404 not found
         });
       },
     })(req, res, next);
@@ -51,6 +61,7 @@ const initWebRoutes = (app) => {
   //rest api
   //GET - R, POST- C, PUT - U, DELETE - D
   router.get("/api/test-api", apiController.testApi);
+  router.post("/verify-token", loginController.verifySSOToken);
 
   return app.use("/", router);
 };
